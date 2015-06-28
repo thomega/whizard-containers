@@ -1,0 +1,16 @@
+#! /bin/sh
+
+case $# in
+  1) url="$1"; dir=".";;
+  2) url="$1"; dir="$2";;
+  *) echo "usage: $0 url [dir]" 1>&2; exit -1;;
+esac
+
+file="`basename $url`"
+
+if test -r "$file" && gzip -qt "$file"; then
+  :
+else
+  rm -f "$file"
+  wget "$url"
+fi
