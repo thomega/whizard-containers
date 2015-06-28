@@ -5,7 +5,8 @@ MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
 RUN apt-get update
 RUN apt-get install --no-install-recommends -yq \
    gfortran g++ make ocaml-nox wget ca-certificates noweb \
-   texlive-latex-base ocamlweb
+   texlive-latex-base ocamlweb \
+   less
 
 ADD wgetx /usr/local/bin/
 RUN chmod 755 /usr/local/bin/wgetx

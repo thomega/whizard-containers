@@ -26,6 +26,7 @@ RUN make -j `getconf _NPROCESSORS_ONLN`
 RUN make check
 USER root
 RUN make install
+RUN ldconfig
 USER whizard
 WORKDIR /home/whizard/src
 RUN rm -fr $HEPMC
@@ -45,7 +46,8 @@ RUN ./configure
 RUN make -j `getconf _NPROCESSORS_ONLN`
 USER root
 RUN make install
-RUN lhapdf install cteq66 cteq6l1
+RUN ldconfig
+RUN lhapdf install cteq6l1 CT10
 USER whizard
 WORKDIR /home/whizard/src
 RUN rm -fr $LHAPDF
