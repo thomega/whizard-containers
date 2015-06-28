@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends -yq \
    gfortran g++ make ocaml-nox wget ca-certificates noweb \
    texlive-latex-base ocamlweb \
-   less
+   less && apt-get clean
 
 ADD wgetx /usr/local/bin/
 RUN chmod 755 /usr/local/bin/wgetx

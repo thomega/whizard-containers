@@ -4,7 +4,7 @@ MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
 
 USER root
 RUN apt-get install --no-install-recommends -yq \
-     subversion automake libtool
+     subversion automake libtool && apt-get clean
 
 ########################################################################
 # These should have already been set by whizard_build_env 

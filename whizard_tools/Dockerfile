@@ -36,7 +36,8 @@ RUN rm -fr $HEPMC
 ########################################################################
 
 USER root
-RUN apt-get install --no-install-recommends -qy python-dev libboost-dev
+RUN apt-get install --no-install-recommends -qy \
+      python-dev libboost-dev && apt-get clean
 
 USER whizard
 RUN wgetx http://www.hepforge.org/archive/lhapdf/$LHAPDF.tar.gz
