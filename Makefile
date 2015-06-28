@@ -1,7 +1,8 @@
 USER = thomega
 
-all: whizard tools build_env
+all: whizard trunk tools build_env
 
+trunk: whizard-trunk.stamp
 whizard: whizard-2.2.6.stamp
 tools: whizard_tools.stamp
 build_env: whizard_build_env.stamp
@@ -10,6 +11,7 @@ build_env: whizard_build_env.stamp
 	docker build -t "$(USER)/$*" $*/
 	touch $@
 
+whizard-trunk.stamp: whizard_tools.stamp whizard_build_env.stamp
 whizard-2.2.6.stamp: whizard_tools.stamp whizard_build_env.stamp
 whizard_tools.stamp: whizard_build_env.stamp
 
