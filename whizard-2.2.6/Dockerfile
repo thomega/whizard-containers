@@ -27,6 +27,7 @@ RUN make -j `getconf _NPROCESSORS_ONLN`
 RUN make -j `getconf _NPROCESSORS_ONLN` check
 USER root
 RUN make install
+RUN ldconfig
 USER whizard
 RUN make -j `getconf _NPROCESSORS_ONLN` installcheck
 WORKDIR ..
