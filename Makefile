@@ -19,3 +19,7 @@ whizard_build_env.stamp: whizard_build_env/wgetx
 
 clean:
 	rm -f *.stamp *~ */*~
+
+realclean: clean
+	docker rm `docker ps -aq`
+	docker rmi `docker images -q`
