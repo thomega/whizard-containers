@@ -1,0 +1,3 @@
+#! /bin/sh
+########################################################################
+docker run -it -v `pwd`:/home/whizard thomega/whizard-2.2.6 /usr/local/bin/whizard "$@"
