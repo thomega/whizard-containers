@@ -1,20 +1,3 @@
 
-  * The containers appear to be too large
+  * The containers appear to be too large (FIXED)
 
-      thomega/whizard-trunk     2.35 GB
-      thomega/whizard-2.2.6     2.26 GB
-      thomega/whizard_tools     1.10 GB
-      thomega/whizard_build_env 0.56 GB
-      debian                    0.13 GB
-
-    See, e.g. http://woudenberg.io/reducing-docker-image-size/
-
-      When building a Docker image all intermediate layers become part
-      of the final image. So, for example, if we create a 500 MB dummy
-      file in the first step and delete it in the next step the layers is
-      still part of the final image making it quite large.
-
-      If we create and delete the file in the same step there will be
-      no extra layers [...]
-
-    and http://www.centurylinklabs.com/optimizing-docker-images/
