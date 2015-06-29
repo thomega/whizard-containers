@@ -1,2 +1,4 @@
 *~
 *.stamp
+whizard_tools/Dockerfile
+whizard-*/Dockerfile

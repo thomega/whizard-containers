@@ -22,8 +22,6 @@ RUN \
   cd whizard && \
   autoreconf && \
   COMPILE_WHIZARD && \
-  cd .. && \
-  rm -fr _build && \
   chown -R whizard.whizard /home/whizard
 
 ########################################################################
