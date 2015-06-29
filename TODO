@@ -1,7 +1,9 @@
 
+  * Standadize LABELs
+
   * Implement data VOLUMEs
 
-  * Standadize LABELs
+      - is "-v `pwd`:/home/whizard" enough?
 
   * The containers appear to be too large (FIXED)
 
