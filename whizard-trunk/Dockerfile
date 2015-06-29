@@ -1,5 +1,8 @@
 FROM thomega/whizard_tools:latest
 MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
+LABEL \
+  org.hepforge.whizard.image="installation" \
+  org.hepforge.whizard.status="unreleased subversion trunk"
 ########################################################################
 
 RUN apt-get install --no-install-recommends -yq \

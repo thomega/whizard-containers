@@ -1,5 +1,9 @@
 FROM thomega/whizard_tools:latest
 MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
+LABEL \
+  org.hepforge.whizard.image="installation" \
+  org.hepforge.whizard.version="2.2.6" \
+  org.hepforge.whizard.status="release"
 ########################################################################
 
 ENV WHIZARD whizard-2.2.6

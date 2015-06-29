@@ -1,5 +1,7 @@
 FROM debian:latest
 MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
+LABEL \
+  org.hepforge.whizard.image="minimal build environment"
 ########################################################################
 
 RUN apt-get update
