@@ -36,6 +36,7 @@ define([[BUILD_HEPMC]],
   [[ RUN \
        wgetx http://lcgapp.cern.ch/project/simu/HepMC/download/HepMC-$1.tar.gz && \
        tar xzf HepMC-$1.tar.gz && \
+       rm -f HepMC-$1.tar.gz && \
        cd HepMC-$1 && \
        ./configure --with-momentum=GEV --with-length=MM && \
        make -j `getconf _NPROCESSORS_ONLN` && \
@@ -49,6 +50,7 @@ define([[BUILD_LHAPDF]],
   [[ RUN \
        wgetx http://www.hepforge.org/archive/lhapdf/LHAPDF-$1.tar.gz && \
        tar xzf LHAPDF-$1.tar.gz && \
+       rm -f LHAPDF-$1.tar.gz && \
        cd LHAPDF-$1 && \
        ./configure && \
        make -j `getconf _NPROCESSORS_ONLN` && \
