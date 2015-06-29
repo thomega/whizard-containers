@@ -11,6 +11,9 @@ build_env: whizard_build_env.stamp
 	docker build -t "$(USER)/$*" $*/
 	touch $@
 
+%/Dockerfile: %/Dockerfile.m4
+	m4 macros.m4 $< > $@
+
 whizard-trunk.stamp: whizard_tools.stamp whizard_build_env.stamp
 whizard-2.2.6.stamp: whizard_tools.stamp whizard_build_env.stamp
 whizard_tools.stamp: whizard_build_env.stamp

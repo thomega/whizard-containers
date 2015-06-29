@@ -19,15 +19,7 @@ RUN \
   wget http://www.hepforge.org/archive/whizard/$WHIZARD.tar.gz && \
   tar xzf $WHIZARD.tar.gz && \
   cd $WHIZARD && \
-  mkdir _build && \
-  cd _build && \
-  ../configure --disable-static FCFLAGS="-O2 -g" && \
-  make -j `getconf _NPROCESSORS_ONLN` && \
-  make -j `getconf _NPROCESSORS_ONLN` check && \
-  make install && \
-  ldconfig && \
-  whizard && \
-  make -j `getconf _NPROCESSORS_ONLN` installcheck && \
+  COMPILE_WHIZARD && \
   cd /tmp && \
   rm -fr $WHIZARD
 
