@@ -9,12 +9,21 @@ LABEL \
 WORKDIR /tmp
 
 # Debian's HepMC is up-to-date
-# Debian's LHAPDF is still at 5.9, 6.x needs Boost and python
-DEBIAN_INSTALL([[libhepmc-dev libhepmcfio-dev python-dev libboost-dev]])
+DEBIAN_INSTALL([[libhepmc-dev libhepmcfio-dev]])
 dnl BUILD_HEPMC([[2.06.09]])
+# Debian's LHAPDF is still at 5.9, 6.x needs Boost and python
+DEBIAN_INSTALL([[python-dev libboost-dev]])
 BUILD_LHAPDF([[6.1.5]])
+# Hoppet is simple
 BUILD_HOPPET([[1.1.5]])
-# LCIO requires Java.
+# LCIO builds from svn and requires Java.
 DEBIAN_INSTALL([[subversion cmake default-jdk zlib1g-dev]])
-BUILD_LCIO([[v02-06]])
+dnl BUILD_LCIO([[v02-06]])
+BUILD_LCIO_LOCAL([[v02-06]])
+# Debian's FastJet is still at 3.0.6
+dnl DEBIAN_INSTALL([[libfastjet-dev libfastjet-fortran-dev]])
+BUILD_FASTJET([[3.1.2]])
+BUILD_FASTJET_CONTRIB([[1.017]])
+# Still to come:
+dnl BUILD_STDHEP([[5-06-01]])
 WORKDIR /home/whizard

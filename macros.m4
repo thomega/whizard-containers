@@ -15,6 +15,7 @@ define([[COMPILE_WHIZARD]],
   [[ mkdir _build && \
      cd _build && \
      ../configure --disable-static FCFLAGS="-O2 -g" && \
+     cp config.log config.status /home/whizard/ && \
      make -j `getconf _NPROCESSORS_ONLN` && \
      make -j `getconf _NPROCESSORS_ONLN` check && \
      make install && \
@@ -81,10 +82,77 @@ RUN \
  cd _build && \
  cmake .. && \
  make install && \
+ ldconfig && \
  make tests && \
  make test && \
  cd ../.. && \
  rm -fr lcio ]])
+
+# Subversion checkout of LCIO can take ages so we
+# allow ourselves to waste a little space
+define([[BUILD_LCIO_LOCAL]],
+  [[dnl
+ADD lcio-$1.tar.gz ./
+RUN \
+ cd lcio && \
+ mkdir _build && \
+ cd _build && \
+ cmake .. && \
+ make install && \
+ ldconfig && \
+ make tests && \
+ make test && \
+ cd ../.. && \
+ rm -fr lcio ]])
+
+define([[BUILD_FASTJET]],
+  [[dnl
+# Run everything in the same `RUN' statement to avoid potentially
+# big intermediate levels with a lot of deleted files
+RUN \
+ wgetx http://fastjet.fr/repo/fastjet-$1.tar.gz && \
+ tar xzf fastjet-$1.tar.gz && \
+ rm -f fastjet-$1.tar.gz && \
+ cd fastjet-$1 && \
+ ./configure && \
+ make -j `getconf _NPROCESSORS_ONLN` && \
+ make -j `getconf _NPROCESSORS_ONLN` check && \
+ make install && \
+ ldconfig && \
+ cd .. && \
+ rm -fr fastjet-$1 ]])
+
+define([[BUILD_FASTJET_CONTRIB]],
+  [[dnl
+# Run everything in the same `RUN' statement to avoid potentially
+# big intermediate levels with a lot of deleted files
+RUN \
+ wgetx http://fastjet.hepforge.org/contrib/downloads/fjcontrib-$1.tar.gz && \
+ tar xzf fjcontrib-$1.tar.gz && \
+ rm -f fjcontrib-$1.tar.gz && \
+ cd fjcontrib-$1 && \
+ ./configure && \
+ make -j `getconf _NPROCESSORS_ONLN` && \
+ make -j `getconf _NPROCESSORS_ONLN` check && \
+ make install && \
+ ldconfig && \
+ cd .. && \
+ rm -fr fjcontrib-$1 ]])
+
+# stdhep doesn't build out of the box, because the
+# Makefile lives in the age of g77 :( ...
+define([[BUILD_STDHEP]],
+  [[dnl
+# Run everything in the same `RUN' statement to avoid potentially
+# big intermediate levels with a lot of deleted files
+RUN \
+ wgetx http://cepa.fnal.gov/psm/stdhep/dist/stdhep-$1.tar.gz && \
+ tar xzf stdhep-$1.tar.gz && \
+ rm -f stdhep-$1.tar.gz && \
+ cd stdhep-$1 && \
+ make BUILD_SHARED="true" all && \
+ cd .. && \
+ : rm -fr stdhep-$1 ]])
 
 define([[BUILD_GENERIC]],
   [[ RUN \
