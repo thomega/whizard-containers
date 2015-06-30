@@ -1,6 +1,16 @@
 # We have /bin/sh code with quotes
 changequote(`[[',`]]')
 
+define([[DEBIAN_UPDATE]],[[RUN apt-get update]])
+
+define([[DEBIAN_INSTALL]],
+  [[dnl
+# It is important to run `apt-get install' and `apt-get clean'
+# in the same `RUN' statement to avoid potentially big intermediate
+# levels with a lot of cruft in `/var/cache/apt/archives'
+RUN apt-get install --no-install-recommends -qy \
+  $1 && apt-get clean ]])
+
 define([[COMPILE_WHIZARD]],
   [[ mkdir _build && \
      cd _build && \
@@ -60,4 +70,32 @@ define([[BUILD_LHAPDF]],
        cd .. && \
        rm -fr LHAPDF-$1 ]] )
 
+define([[BUILD_GENERIC]],
+  [[ RUN \
+       wgetx $1/$2-$3.$4 && \
+       tar xzf $2-$3.$4 && \
+       rm -f $2-$3.$4 && \
+       cd $2-$3 && \
+       ./configure && \
+       make -j `getconf _NPROCESSORS_ONLN` && \
+       make install && \
+       ldconfig && \
+       cd .. && \
+       rm -fr $2-$3 ]] )
+
+define([[BUILD_GENERIC_STEPS]],
+  [[ RUN wgetx $1/$2-$3.$4
+     RUN tar xzf $2-$3.$4
+     RUN rm -f $2-$3.$4
+     WORKDIR $2-$3
+     RUN ./configure
+     RUN make -j `getconf _NPROCESSORS_ONLN`
+     RUN make install
+     RUN ldconfig
+     WORKDIR ..
+     RUN rm -fr $2-$3 ]] )
+
+define([[BUILD_HOPPET]],
+  [[ BUILD_GENERIC([[https://hoppet.hepforge.org/downloads]],
+                   [[hoppet]], [[$1]], [[tgz]]) ]])
 

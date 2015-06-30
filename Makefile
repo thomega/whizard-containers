@@ -27,8 +27,7 @@ push:
 	docker push thomega/whizard-trunk
 
 clean:
-	rm -f whizard_tools/Dockerfile whizard-*/Dockerfile \
-		*.stamp *~ */*~
+	rm -f */Dockerfile *.stamp *~ */*~
 
 realclean: clean
 	docker rm `docker ps -aq`
