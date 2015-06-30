@@ -14,4 +14,7 @@ DEBIAN_INSTALL([[libhepmc-dev libhepmcfio-dev python-dev libboost-dev]])
 dnl BUILD_HEPMC([[2.06.09]])
 BUILD_LHAPDF([[6.1.5]])
 BUILD_HOPPET([[1.1.5]])
+# LCIO requires Java.
+DEBIAN_INSTALL([[subversion cmake default-jdk zlib1g-dev]])
+BUILD_LCIO([[v02-06]])
 WORKDIR /home/whizard

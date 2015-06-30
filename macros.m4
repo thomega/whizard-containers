@@ -70,6 +70,22 @@ define([[BUILD_LHAPDF]],
        cd .. && \
        rm -fr LHAPDF-$1 ]] )
 
+define([[BUILD_LCIO]],
+  [[dnl
+# Run everything in the same `RUN' statement to avoid potentially
+# big intermediate levels with a lot of deleted files
+RUN \
+ svn co svn://svn.freehep.org/lcio/tags/$1 lcio && \
+ cd lcio && \
+ mkdir _build && \
+ cd _build && \
+ cmake .. && \
+ make install && \
+ make tests && \
+ make test && \
+ cd ../.. && \
+ rm -fr lcio ]])
+
 define([[BUILD_GENERIC]],
   [[ RUN \
        wgetx $1/$2-$3.$4 && \
