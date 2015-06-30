@@ -14,7 +14,7 @@ RUN apt-get install --no-install-recommends -qy \
 define([[COMPILE_WHIZARD]],
   [[ mkdir _build && \
      cd _build && \
-     ../configure --disable-static FCFLAGS="-O2 -g" && \
+     ../configure --disable-static FCFLAGS="-O2 -g" $1 && \
      cp config.log config.status /home/whizard/ && \
      make -j `getconf _NPROCESSORS_ONLN` && \
      make -j `getconf _NPROCESSORS_ONLN` check && \
@@ -37,11 +37,31 @@ define([[BUILD_WHIZARD_RELEASE]],
        wget http://www.hepforge.org/archive/whizard/whizard-$1.tar.gz && \
        tar xzf whizard-$1.tar.gz && \
        cd whizard-$1 && \
-       COMPILE_WHIZARD && \
+       COMPILE_WHIZARD([[$2]]) && \
        cd .. && \
        rm -fr whizard-$1
      USER whizard
      WORKDIR /home/whizard ]])
+
+define([[CONFIGURE_WHIZARD]],
+  [[ mkdir _build && \
+     cd _build && \
+     ../configure --disable-static FCFLAGS="-O2 -g" $1 && \
+     cp config.log config.status /home/whizard/ ]])
+
+define([[CONFIGURE_WHIZARD_RELEASE]],
+  [[ FROM thomega/whizard_tools:latest
+     MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
+     LABEL \
+       org.hepforge.whizard.image="installation" \
+       org.hepforge.whizard.version="$1" \
+       org.hepforge.whizard.status="release"
+     WORKDIR /tmp
+     RUN \
+       wget http://www.hepforge.org/archive/whizard/whizard-$1.tar.gz && \
+       tar xzf whizard-$1.tar.gz && \
+       cd whizard-$1 && \
+       CONFIGURE_WHIZARD([[$2]]) ]])
 
 define([[BUILD_HEPMC]],
   [[ RUN \
@@ -97,7 +117,7 @@ RUN \
  cd lcio && \
  mkdir _build && \
  cd _build && \
- cmake .. && \
+ cmake -DCMAKE_INSTALL_PREFIX=/usr .. && \
  make install && \
  ldconfig && \
  make tests && \
