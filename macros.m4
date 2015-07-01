@@ -18,6 +18,10 @@ define([[COMPILE_WHIZARD]],
      cp config.log config.status /home/whizard/ && \
      make -j `getconf _NPROCESSORS_ONLN` && \
      make -j `getconf _NPROCESSORS_ONLN` check && \
+     find -name test-suite.log | \
+       while read f; do \
+         cp "$f" "`echo $f | sed -e 's|/|-|g' -e 's|^\.-|/home/whizard/|'`"; \
+       done && \
      make install && \
      ldconfig && \
      whizard && \
@@ -159,8 +163,6 @@ RUN \
  cd .. && \
  rm -fr fjcontrib-$1 ]])
 
-# stdhep doesn't build out of the box, because the
-# Makefile lives in the age of g77 :( ...
 define([[BUILD_STDHEP]],
   [[dnl
 # Run everything in the same `RUN' statement to avoid potentially
@@ -170,9 +172,12 @@ RUN \
  tar xzf stdhep-$1.tar.gz && \
  rm -f stdhep-$1.tar.gz && \
  cd stdhep-$1 && \
- make BUILD_SHARED="true" all && \
+ make F77=gfortran FFLAGS='-O2 -g -fd-lines-as-comments' \
+  BUILD_SHARED=true all && \
+ cp -p lib/* /usr/local/lib/ && \
+ ldconfig && \
  cd .. && \
- : rm -fr stdhep-$1 ]])
+ rm -fr stdhep-$1 ]])
 
 define([[BUILD_GENERIC]],
   [[ RUN \

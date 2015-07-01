@@ -24,6 +24,5 @@ BUILD_LCIO_LOCAL([[v02-06]])
 dnl DEBIAN_INSTALL([[libfastjet-dev libfastjet-fortran-dev]])
 BUILD_FASTJET([[3.1.2]])
 BUILD_FASTJET_CONTRIB([[1.017]])
-# Still to come:
-dnl BUILD_STDHEP([[5-06-01]])
+BUILD_STDHEP([[5-06-01]])
 WORKDIR /home/whizard
