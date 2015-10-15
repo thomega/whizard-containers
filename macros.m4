@@ -167,10 +167,11 @@ define([[BUILD_STDHEP]],
   [[dnl
 # Run everything in the same `RUN' statement to avoid potentially
 # big intermediate levels with a lot of deleted files
+# wgetx http://cepa.fnal.gov/psm/stdhep/dist/stdhep-$1.tar.gz
+# tar xzf stdhep-$1.tar.gz
+# rm -f stdhep-$1.tar.gz
+ADD stdhep-$1.tar.gz ./
 RUN \
- wgetx http://cepa.fnal.gov/psm/stdhep/dist/stdhep-$1.tar.gz && \
- tar xzf stdhep-$1.tar.gz && \
- rm -f stdhep-$1.tar.gz && \
  cd stdhep-$1 && \
  make F77=gfortran FFLAGS='-O2 -g -fd-lines-as-comments' \
   BUILD_SHARED=true all && \
