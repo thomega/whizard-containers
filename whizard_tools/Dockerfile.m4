@@ -19,7 +19,9 @@ BUILD_HOPPET([[1.1.5]])
 # LCIO builds from svn and requires Java.
 DEBIAN_INSTALL([[subversion cmake default-jdk zlib1g-dev]])
 dnl BUILD_LCIO([[v02-06]])
-BUILD_LCIO_LOCAL([[v02-06]])
+dnl BUILD_LCIO_LOCAL([[v02-06]])
+dnl BUILD_LCIO_LOCAL([[v02-04-03]])
+BUILD_LCIO_LOCAL([[2015-10-15]])
 # Debian's FastJet is still at 3.0.6
 dnl DEBIAN_INSTALL([[libfastjet-dev libfastjet-fortran-dev]])
 BUILD_FASTJET([[3.1.2]])

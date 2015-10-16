@@ -121,7 +121,8 @@ RUN \
  cd lcio && \
  mkdir _build && \
  cd _build && \
- cmake -DCMAKE_INSTALL_PREFIX=/usr .. && \
+ cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
+ make && \
  make install && \
  ldconfig && \
  make tests && \

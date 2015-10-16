@@ -10,6 +10,8 @@ DEBIAN_INSTALL([[dnl
   texlive-latex-base texlive-latex-extra texlive-metapost \
   ghostscript feynmf ocamlweb]])
 
+DEBIAN_INSTALL([[less vim emacs-nox]])
+
 ADD wgetx /usr/local/bin/
 RUN chmod 755 /usr/local/bin/wgetx
 
