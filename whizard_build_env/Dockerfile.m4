@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:testing
 MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
 LABEL \
   org.hepforge.whizard.image="minimal build environment"

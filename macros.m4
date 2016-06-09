@@ -1,7 +1,8 @@
 # We have /bin/sh code with quotes
 changequote(`[[',`]]')
 
-define([[DEBIAN_UPDATE]],[[RUN apt-get update]])
+define([[DEBIAN_UPDATE]],
+  [[RUN apt-get update && apt-get upgrade -yq && apt-get clean]])
 
 define([[DEBIAN_INSTALL]],
   [[dnl
