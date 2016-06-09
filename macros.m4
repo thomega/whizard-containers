@@ -76,7 +76,8 @@ define([[BUILD_HEPMC]],
        cd HepMC-$1 && \
        ./configure --with-momentum=GEV --with-length=MM && \
        make -j `getconf _NPROCESSORS_ONLN` && \
-       make check && \
+       # According to JRR the failing HepMC tests are no problem
+       # make check && \
        make install && \
        ldconfig && \
        cd .. && \

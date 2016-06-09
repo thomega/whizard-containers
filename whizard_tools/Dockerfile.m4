@@ -3,17 +3,18 @@ MAINTAINER "Thorsten Ohl <ohl@physik.uni-wuerzburg.de>"
 LABEL \
   org.hepforge.whizard.image="build environment with HepMC and LHAPDF" \
   org.hepforge.whizard.hepmc.version="2.06.09" \
-  org.hepforge.whizard.lhapdf.version="6.1.5"
+  org.hepforge.whizard.lhapdf.version="6.1.6"
 ########################################################################
 
 WORKDIR /tmp
 
-# Debian's HepMC is up-to-date
-DEBIAN_INSTALL([[libhepmc-dev libhepmcfio-dev]])
-dnl BUILD_HEPMC([[2.06.09]])
+# "Debian's HepMC is up-to-date" (in wheezy, jessie and sid)
+# debian testing currently refers to stretch and there we have no hepmc
+dnl DEBIAN_INSTALL([[libhepmc-dev libhepmcfio-dev]])
+BUILD_HEPMC([[2.06.09]])
 # Debian's LHAPDF is still at 5.9, 6.x needs Boost and python
 DEBIAN_INSTALL([[python-dev libboost-dev]])
-BUILD_LHAPDF([[6.1.5]])
+BUILD_LHAPDF([[6.1.6]])
 # Hoppet is simple
 BUILD_HOPPET([[1.1.5]])
 # LCIO builds from svn and requires Java.
