@@ -83,6 +83,22 @@ define([[BUILD_HEPMC]],
        cd .. && \
        rm -fr HepMC-$1 ]])
 
+define([[BUILD_OPENLOOPS]],
+  [[ RUN \
+       svn checkout http://openloops.hepforge.org/svn/OpenLoops/branches/public \
+          ./OpenLoops && \
+       cd OpenLoops && \
+       printf '[OpenLoops]\nprocess_repositories=public,whizard\ncompile_extra=1' \
+          >> openloops.cfg && \
+       ./scons && \
+       # these should be more than enough for the tutorial and could be slimmed
+       ./openloops libinstall ppzj ppzjj ppll eett eehtt tbw && \
+       echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:`pwd`/lib" >> ~/.bashrc && \
+       cd examples && \
+       ../scons && \
+       ./OL_fortran && \
+        cd ../..  ]])
+
 define([[BUILD_LHAPDF]],
   [[ RUN \
        wgetx http://www.hepforge.org/archive/lhapdf/LHAPDF-$1.tar.gz && \
