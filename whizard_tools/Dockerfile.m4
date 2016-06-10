@@ -38,3 +38,4 @@ WORKDIR /home/whizard
 
 # We build OpenLoops in the user dir as it isn't easily installed
 BUILD_OPENLOOPS()
+ADD .bashrc /home/whizard/.bashrc
