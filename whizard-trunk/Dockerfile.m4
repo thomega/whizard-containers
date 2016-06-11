@@ -21,7 +21,7 @@ RUN \
   svn co http://whizard.hepforge.org/svn/trunk whizard && \
   cd whizard && \
   autoreconf && \
-  COMPILE_WHIZARD && \
+  COMPILE_WHIZARD([[--enable-hoppet --enable-fastjet --enable-openloops]])&& \
   chown -R whizard.whizard /home/whizard
 
 ########################################################################
