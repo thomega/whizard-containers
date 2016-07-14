@@ -38,6 +38,7 @@ define([[BUILD_WHIZARD_RELEASE]],
        org.hepforge.whizard.version="$1" \
        org.hepforge.whizard.status="release"
      WORKDIR /tmp
+     ENV LD_LIBRARY_PATH /home/whizard/OpenLoops/lib:$LD_LIBRARY_PATH
      RUN \
        wget http://www.hepforge.org/archive/whizard/whizard-$1.tar.gz && \
        tar xzf whizard-$1.tar.gz && \

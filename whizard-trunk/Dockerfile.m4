@@ -8,6 +8,9 @@ LABEL \
 RUN apt-get install --no-install-recommends -yq \
      subversion automake libtool && apt-get clean
 
+RUN apt-get install --no-install-recommends -yq \
+     gnuplot && apt-get clean
+
 ########################################################################
 WORKDIR /home/whizard
 RUN mkdir -p src
@@ -16,6 +19,8 @@ WORKDIR src
 ########################################################################
 # WHIZARD
 ########################################################################
+
+ENV LD_LIBRARY_PATH /home/whizard/OpenLoops/lib:$LD_LIBRARY_PATH
 
 RUN \
   svn co http://whizard.hepforge.org/svn/trunk whizard && \
