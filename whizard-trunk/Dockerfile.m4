@@ -6,10 +6,7 @@ LABEL \
 ########################################################################
 
 RUN apt-get install --no-install-recommends -yq \
-     subversion automake libtool && apt-get clean
-
-RUN apt-get install --no-install-recommends -yq \
-     gnuplot && apt-get clean
+     subversion automake libtool gnuplot && apt-get clean
 
 ########################################################################
 WORKDIR /home/whizard
