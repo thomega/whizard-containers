@@ -1,12 +1,13 @@
 Tutorial preparation
 ================================================================================
 - Build your desired image (e.g. `thomega/whizard-trunk` or `thomega/whizard-2.2.7`)
-  with make (`make trunk` or `make whizard`).
+  with make (`sudo make trunk` or `sudo make whizard`).
 
 - Fire it up with `docker run -it thomega/whizard-trunk`
 
 - You can *mount* folders with the
   `-v /folder/on/host:/home/whizard/folder/on/guest` option for `docker run`
+  (absolute paths required)
 
 - Put the container in the state you want it to be for the students (e.g. copy
   files from `/home/whizard/mounted` to `/home/whizard/tutorial` to make them
